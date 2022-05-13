@@ -11,6 +11,50 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <a href="/" class="headerlogo"><img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" alt="ヘッダーロゴ"></a>
+      <div>
+      <% if user_signed_in? %>
+        <div>
+          <p ><%= current_user.username %></p>
+        </div>
+
+        <% if current_user.profile_img_id? %>
+          <p><%= image_tag current_user.imr_name.url, :size => '70x70', class: 'user-img' %></p>
+        <% else %>
+          <p><%= image_tag "/assets/default_icon.jpeg", :size => '70x70', class: 'user-img' %></p>
+        <% end %>                  
+      <% else %>
+        <%= link_to "ログイン", new_user_session_path %>
+        <%= link_to "登録する", new_user_registration_path %>
+      <% end %>
+        </div>
+<%
+=begin
+%>
+      <% if user_signed_in? %>
+        <ul>
+          <li><%= link_to "ルーム登録", new_room_path %></li>
+          <li><%= link_to "予約済みルーム一覧", reserves_path %></li>
+          <li><%= link_to "登録済みルーム一覧", rooms_path %></li>
+          <li><%= link_to "設定", user_path(current_user) %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      <% end %>
+<%
+=end
+%>
+<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+    </header>
+
+    <div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+        <%= yield %>
+    </div>
+
+    <footer>
+      <p>&copy; 2020 POTEPAN.INC.</p>
+    </footer>
   </body>
 </html>
