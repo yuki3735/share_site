@@ -1,0 +1,53 @@
+<div>
+  <h4><%= link_to "基本情報", new_room_path %></h4>
+</div>
+
+<% if flash[:alert] %>
+  <p class="alert"><%= flash[:alert] %></p>
+<% end %>
+
+<div>
+  <h4>ルーム情報登録</h4>
+</div>
+
+<%= form_with model: @room do |f| %>
+  <table>
+    <tr>
+      <th>
+        <%= f.label :roomname ,"ルーム名" %>
+      </th>
+      <td><%= f.text_field :roomname, placeholder: "ルーム名を入力" %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :introduction ,"ルーム紹介" %>
+      </th>
+      <td><%= f.text_area :introduction, placeholder: "ルーム説明を入力" %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :price ,"料金" %>
+      </th>
+      <td><%= f.text_field :price, placeholder: "1日あたりの料金を入力" %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :address ,"住所" %>
+        <span class="red-box">必須</span>
+      </th>
+      <td><%= f.text_field :address, placeholder: "住所を入力" %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.label :room_img ,"ルーム画像" %>
+      </th>
+      <td><%= f.file_field :room_img, placeholder: "選択されていません" %></td>
+    </tr>
+    <tr>
+      <th>
+        <%= f.submit "登録" %>
+      </th>
+    </tr>
+  </table>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+<% end %>

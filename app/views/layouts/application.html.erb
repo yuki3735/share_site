@@ -29,22 +29,17 @@
         <%= link_to "登録する", new_user_registration_path %>
       <% end %>
         </div>
-<%
-=begin
-%>
+
       <% if user_signed_in? %>
         <ul>
           <li><%= link_to "ルーム登録", new_room_path %></li>
-          <li><%= link_to "予約済みルーム一覧", reserves_path %></li>
+          <li><%= link_to "予約済みルーム一覧", reservations_path %></li>
           <li><%= link_to "登録済みルーム一覧", rooms_path %></li>
           <li><%= link_to "設定", user_path(current_user) %></li>
           <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
         </ul>
       <% end %>
-<%
-=end
-%>
-<%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+
     </header>
 
     <div>

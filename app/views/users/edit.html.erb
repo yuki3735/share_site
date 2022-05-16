@@ -1,0 +1,41 @@
+<div class="user-show-nav">
+  <h4><%= link_to "アカウント", user_path(@user) %></h4>
+  <h4><%= link_to "プロフィール", edit_user_path(@user) %></h4>
+</div>
+
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<div class="user-edit-content-item">
+  <h4>プロフィール</h4>
+</div>
+
+<%= form_with model: @user do |f| %>
+  <table>
+    <div>
+          <% if @user.profile_img_id? %>
+            <%= image_tag @user.profile_img.url, :size => '70x70' %>
+          <% else %>
+            <%= image_tag "/assets/default_icon.jpeg", :size => '70x70' %>
+          <% end %>
+    </div>
+    <tr>
+        <th><%= f.label :profile_img_id ,"アイコン画像" %></th>
+        <td><%= f.file_field :profile_img_id, placeholder: "選択されていません", required: true %></td>
+    </tr>
+    <tr>
+        <th><%= f.label :username ,"名前" %></th>
+        <td><%= f.text_field :username, placeholder: "名前を入力" %></td>
+    </tr>
+    <tr>
+        <th><%= f.label :profile ,"自己紹介" %></th>
+        <td><%= f.text_area :profile, placeholder: "自己紹介を入力", required: true, maxlength: "140" %></td>
+    </tr>
+    <tr>
+        <th>
+          <%= f.submit "更新" %>
+        </th>
+    </tr>
+  </table>
+<% end %>
