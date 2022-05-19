@@ -20,7 +20,7 @@
         </div>
 
         <% if current_user.profile_img_id? %>
-          <p><%= image_tag current_user.imr_name.url, :size => '70x70', class: 'user-img' %></p>
+          <p><%= image_tag current_user.profile_img_id.url, :size => '70x70', class: 'user-img' %></p>
         <% else %>
           <p><%= image_tag "/assets/default_icon.jpeg", :size => '70x70', class: 'user-img' %></p>
         <% end %>                  

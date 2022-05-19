@@ -24,8 +24,7 @@
 
 <p><%= @room.introduction %></p>
 
-<%= form_with url: new_reservation_path, method: :post do |f| %>
-  <%= f.hidden_field :room_id, value: @room.id %>
+<%= form_with url: new_reservation_path, model: Reservation.new, method: :get do |f| %>
   <p><%= "¥" + @room.price.to_s + "/" + "日" %></p>
   <%= f.label :start_day ,"開始日" %>
   <%= f.date_field :start_day, min: Date.current, required: true %>

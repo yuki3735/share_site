@@ -15,7 +15,7 @@
   <table>
     <div>
           <% if @user.profile_img_id? %>
-            <%= image_tag @user.profile_img.url, :size => '70x70' %>
+            <%= image_tag @user.profile_img_id.url, :size => '70x70' %>
           <% else %>
             <%= image_tag "/assets/default_icon.jpeg", :size => '70x70' %>
           <% end %>

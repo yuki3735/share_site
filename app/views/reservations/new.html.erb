@@ -1,5 +1,4 @@
 
-
 <div>
   <h2>予約内容確認</h2>
 </div>
@@ -13,7 +12,7 @@
   <%= f.label :end_day ,"終了日" %>
   <%= f.text_field :end_day, readonly: true, value: @reservation.end_day %>
   <div>
-    <%= "使用日数 : #{use_day}日" %>
+    <%= "使用日数 : #{@days}日" %>
   </div>
   <div>
     <%= "人数 : #{@reservation.number_people}人" %>
@@ -21,7 +20,7 @@
   <div>
     <%= f.label :total_price ,"合計金額" %>
   </div>
-  <%= f.text_field :total_price, readonly: true, value: @reservation.number_people.to_i * @room.price.to_i * use_day.to_i %>
+  <%= f.text_field :total_price, readonly: true, value: @reservation.number_people.to_i * @room.price.to_i * @days.to_i %>
   <div>
     <p>上記内容でよろしければ「予約を確定」を押してください。</p>
   </div>
@@ -29,6 +28,6 @@
   <button>
     <%= link_to "ルーム詳細に戻る", room_path(@room) %>
   </button>
-  <%= f.hidden_field :room_id, value: @reservation.room_id %>
-  <%= f.hidden_field :number_people, value: @reservation.number_people %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.hidden_field :user_id, value: @user %>
 <% end %>
