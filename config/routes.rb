@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :reservations
   post "reservations/new" => "reservations#new"
   post "rooms/search" => "rooms#search"
+  post "rooms/result" => "rooms#result"
   resources :users do
     collection do
       get 'search'

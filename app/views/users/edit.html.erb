@@ -1,41 +1,42 @@
-<div class="user-show-nav">
-  <h4><%= link_to "アカウント", user_path(@user) %></h4>
-  <h4><%= link_to "プロフィール", edit_user_path(@user) %></h4>
-</div>
+<div class="share-body">
+  <div class="account-nav">
+    <p class="account-edit-title"><%= link_to "アカウント", user_path(@user) %></p>
+    <p class="account-edit-title"><%= link_to "プロフィール", edit_user_path(@user) %></p>
+  </div>
+  <div class="account-edit-content">
+    <div class="account-edit-content-box">
+      <div class="account-edit-content-item">
+        <p class="account-edit-title my-4">プロフィール</p>
+      </div>
 
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-
-<div class="user-edit-content-item">
-  <h4>プロフィール</h4>
-</div>
-
-<%= form_with model: @user do |f| %>
-  <table>
-    <div>
-          <% if @user.profile_img_id? %>
-            <%= image_tag @user.profile_img_id.url, :size => '70x70' %>
-          <% else %>
-            <%= image_tag "/assets/default_icon.jpeg", :size => '70x70' %>
-          <% end %>
+      <%= form_with model: @user do |f| %>
+        <table>
+          <div class="account-edit-icon">
+            <% if @user.profile_img_id? %>
+              <%= image_tag @user.profile_img_id.url, :size => '70x70', class: "user-img my-3" %>
+            <% else %>
+              <%= image_tag "/assets/default_icon.jpeg", :size => '70x70', class: "user-img my-3" %>
+            <% end %>
+          </div>
+          <tr class="account-edit-content-item">
+            <th class="account-edit-element"><%= f.label :profile_img_id ,"アイコン画像" %><div class="required"></div></th>
+            <th><%= f.file_field :profile_img_id, placeholder: "選択されていません", required: true %></th>
+          </tr>
+          <tr class="account-edit-content-item">
+            <th class="account-edit-element"><%= f.label :username ,"名前" %><div class="required"></div></th>
+            <th><%= f.text_field :username, placeholder: "名前を入力" %></th>
+          </tr>
+          <tr class="account-edit-content-item">
+            <th class="account-edit-element"><%= f.label :profile ,"自己紹介" %><div class="required"></div></th>
+            <th><%= f.text_area :profile, placeholder: "自己紹介を入力", required: true, maxlength: "140" %></th>
+          </tr>
+          <tr class="account-edit-content-item">
+            <th class="account-edit-element">
+              <%= f.submit "更新", class: "btn btn-primary account-edit-btn" %>
+            </th>
+          </tr>
+        </table>
+      <% end %>
     </div>
-    <tr>
-        <th><%= f.label :profile_img_id ,"アイコン画像" %></th>
-        <td><%= f.file_field :profile_img_id, placeholder: "選択されていません", required: true %></td>
-    </tr>
-    <tr>
-        <th><%= f.label :username ,"名前" %></th>
-        <td><%= f.text_field :username, placeholder: "名前を入力" %></td>
-    </tr>
-    <tr>
-        <th><%= f.label :profile ,"自己紹介" %></th>
-        <td><%= f.text_area :profile, placeholder: "自己紹介を入力", required: true, maxlength: "140" %></td>
-    </tr>
-    <tr>
-        <th>
-          <%= f.submit "更新" %>
-        </th>
-    </tr>
-  </table>
-<% end %>
+  </div>
+</div>

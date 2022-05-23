@@ -1,33 +1,37 @@
+<div class="share-body">
+  <div class="room-confirm">
+    <div class="confirm-title">
+      <h2>予約内容確認</h2>
+    </div>
+    <%= form_with model: @reservation, class: "confirm-form" do |f| %>
 
-<div>
-  <h2>予約内容確認</h2>
+      <div class="confirm-item">
+        <%= "¥ " + @room.price.to_s + " / " + "日" %>
+      </div>
+      <%= f.label :start_day ,"開始日" %>
+      <%= f.text_field :start_day, readonly: true, value: @reservation.start_day %>
+      <%= f.label :end_day ,"終了日" %>
+      <%= f.text_field :end_day, readonly: true, value: @reservation.end_day %>
+      <div class="confirm-item">
+        <%= "使用日数 : #{@days}日" %>
+      </div>
+      <div class="confirm-item">
+        <%= "人数 : #{@reservation.number_people}人" %>
+      </div>
+      <div>
+        <%= f.label :total_price ,"合計金額" %>
+      </div>
+      <%= f.text_field :total_price, readonly: true, value: @reservation.number_people.to_i * @room.price.to_i * @days.to_i %>
+      <div class="confirm-item">
+        <p>上記内容でよろしければ「予約を確定」を押してください。</p>
+      </div>
+      <%= f.submit "予約を確定", class: "btn btn-primary" %>
+      <button>
+        <%= link_to "ルーム詳細に戻る", room_path(@room) %>
+      </button>
+      <%= f.hidden_field :room_id, value: @room.id %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :number_people, value: @reservation.number_people %>
+    <% end %>
+  </div>
 </div>
-<%= form_with model: @reservation do |f| %>
-  
-  <div >
-    <%= "¥ " + @room.price.to_s + " / " + "日" %>
-  </div>
-  <%= f.label :start_day ,"開始日" %>
-  <%= f.text_field :start_day, readonly: true, value: @reservation.start_day %>
-  <%= f.label :end_day ,"終了日" %>
-  <%= f.text_field :end_day, readonly: true, value: @reservation.end_day %>
-  <div>
-    <%= "使用日数 : #{@days}日" %>
-  </div>
-  <div>
-    <%= "人数 : #{@reservation.number_people}人" %>
-  </div>
-  <div>
-    <%= f.label :total_price ,"合計金額" %>
-  </div>
-  <%= f.text_field :total_price, readonly: true, value: @reservation.number_people.to_i * @room.price.to_i * @days.to_i %>
-  <div>
-    <p>上記内容でよろしければ「予約を確定」を押してください。</p>
-  </div>
-  <%= f.submit "予約を確定" %>
-  <button>
-    <%= link_to "ルーム詳細に戻る", room_path(@room) %>
-  </button>
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.hidden_field :user_id, value: @user %>
-<% end %>

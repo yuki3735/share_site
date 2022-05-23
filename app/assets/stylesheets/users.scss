@@ -1,3 +1,69 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.devise-edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  flex-direction: column;
+  input {
+    width: 370px;
+    height: 38px;
+  }
+}
+
+.devise-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account-nav {
+  font-size: 18px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.account-edit-content {
+  font-size: 20px;
+}
+
+.account-edit-content {
+  border: 1px solid gray;
+  width: 80%;
+  margin: auto;
+}
+
+.account-edit-element {
+  display: flex;
+  justify-content: center;
+  padding-right: 30px;
+  padding-top: 30px;
+}
+
+.my-3 {
+  margin: 20px!important;
+}
+
+.account-edit-icon {
+  justify-content: center;
+  display: flex;
+}
+
+.account-edit-btn {
+  width: 100px;
+}
+
+.my-4 {
+  font-size: 30px;
+}
+
+.account-edit-content-row {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.my-5 {
+  margin-right: 30px;
+}

@@ -1,40 +1,46 @@
-<% if flash[:alert] %>
-  <p class="alert"><%= flash[:alert] %></p>
-<% end %>
-<% if flash[:notice] %>
-  <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-
-<% if @room.room_img? %>
-  <%= image_tag @room.room_img.url %>
-<% else %>
-  <%= image_tag "/assets/default.jpeg", :size => '500x300' %>
-<% end %>
-
-<% if @user.profile_img_id? %>
-  <%= image_tag @user.profile_img_id.url, :size => '70x70' %>
-<% else %>
-  <%= image_tag "/assets/default_icon.jpeg", :size => '70x70' %>
-<% end %>
-
-<div>
-  <p><%= @room.roomname %></p>
-  <p><%= @room.address %></p>
+<div class="share-body">
+  <div class="room-container"> 
+    <div class="room-row">
+      <div class="room-container-box1">
+        <% if @room.room_img? %>
+          <%= image_tag @room.room_img.url, :size => '500x300' %>
+        <% else %>
+          <%= image_tag "/assets/default.jpeg", :size => '500x300' %>
+        <% end %>
+        <div class="room-element">
+          <div class="user-profile-img">
+            <% if @user.profile_img_id? %>
+              <%= image_tag @user.profile_img_id.url, :size => '70x70', class: "user-img my-3" %>
+            <% else %>
+              <%= image_tag "/assets/default_icon.jpeg", :size => '70x70', class: "user-img my-3" %>
+            <% end %>
+          </div>
+          <div>
+            <p class="room-name"><%= @room.roomname %></p>
+            <p><%= @room.address %></p>
+          </div>
+        </div>
+        <div class="room-introduction">
+          <p><%= @room.introduction %></p>
+        </div>
+      </div>
+      <div class="room-reservation-item">
+        <%= form_with url: new_reservation_path, model: Reservation.new, method: :get, class: "room-form" do |f| %>
+          <p><%= "¥" + @room.price.to_s + "/" + "日" %></p>
+          <%= f.label :start_day ,"開始日" %>
+          <%= f.date_field :start_day, min: Date.current, required: true %>
+          <%= f.label :end_day ,"終了日" %>
+          <%= f.date_field :end_day, min: Date.current.next_day, required: true %>
+          <%= f.label :number_people ,"人数" %>
+          <%= f.number_field :number_people, required: true, min: 1 %>
+          <% if user_signed_in? %>
+            <%= f.submit "予約する", class: "btn btn-primary" %>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path %>
+          <% end %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<p><%= @room.introduction %></p>
-
-<%= form_with url: new_reservation_path, model: Reservation.new, method: :get do |f| %>
-  <p><%= "¥" + @room.price.to_s + "/" + "日" %></p>
-  <%= f.label :start_day ,"開始日" %>
-  <%= f.date_field :start_day, min: Date.current, required: true %>
-  <%= f.label :end_day ,"終了日" %>
-  <%= f.date_field :end_day, min: Date.current.next_day, required: true %>
-  <%= f.label :number_people ,"人数" %>
-  <%= f.number_field :number_people, required: true, min: 1 %>
-  <% if user_signed_in? %>
-    <%= f.submit "予約する" %>
-  <% else %>
-    <%= link_to "ログイン", new_user_session_path %>
-  <% end %>
-<% end %>

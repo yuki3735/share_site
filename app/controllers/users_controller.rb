@@ -12,8 +12,8 @@ class UsersController < ApplicationController
       flash[:notice] = "プロフィールを更新しました"
       redirect_to edit_user_path(current_user)
     else
-      render "homes/index"
       flash[:notice] = "プロフィールを更新できませんでした"
+      render "homes/index"
     end
   end
 

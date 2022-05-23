@@ -4,8 +4,13 @@ class RoomsController < ApplicationController
   end
 
   def search
-    @key = params[:address]
-    @keys = Room.where('address LIKE ?', "%#{@key}%" )
+    @address = params[:address]
+    @addresss = Room.where('address LIKE ?', "%#{@address}%" )
+  end
+
+  def result
+    @key = params[:keywords]
+    @keys = Room.where('roomname LIKE ? OR introduction LIKE ? OR address LIKE ?', "%#{@key}%", "%#{@key}%", "%#{@key}%")
   end
 
   def new
@@ -15,7 +20,6 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     @user = User.find_by(id: @room.user_id)
-    @reservation = Reservation.new
   end
 
   def create

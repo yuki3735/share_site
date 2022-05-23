@@ -7,49 +7,68 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header>
-      <a href="/" class="headerlogo"><img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" alt="ヘッダーロゴ"></a>
-      <div>
-      <% if user_signed_in? %>
-        <div>
-          <p ><%= current_user.username %></p>
+    <header class="header">
+      <div class="header-inner">
+            <div class="header-left">
+              <a href="/" class="header-logo"><img src="https://presite-potepancamp-rails-02.herokuapp.com/assets/logo.png" alt="ヘッダーロゴ"></a>
+              <div class="form-search">
+                <%= form_with url: rooms_search_path, class: "form-conrol" do |f| %>
+                  <%= f.search_field :address, placeholder: "エリア" %>
+                <% end %>
+                <%= form_with url: rooms_result_path, class: "form-conrol" do |f| %>
+                  <%= f.search_field :keywords, placeholder: "キーワード" %> 
+                <% end %>
+              </div>
+            </div>
+          <div class="header-right">
+            <div class="account">
+              <% if user_signed_in? %>
+                <div class="username">
+                  <p ><%= current_user.username %></p>
+                </div>
+                <div id="user-img">
+                  <% if current_user.profile_img_id? %>
+                    <p><%= image_tag current_user.profile_img_id.url, :size => '70x70', class: "user-img" %></p>
+                  <% else %>
+                    <p><%= image_tag "/assets/default_icon.jpeg", :size => '70x70', class: "user-img" %></p>
+                  <% end %>
+                </div>                 
+              <% else %>
+                <%= link_to "ログイン", new_user_session_path,{class: "btn btn-primary my-2"} %>
+                <%= link_to "登録する", new_user_registration_path,{class: "btn btn-second"} %>
+              <% end %>
+            
+              <nav class="menu-vanish" id="menu">
+                <% if user_signed_in? %>
+                  <ul class="menu-bar">
+                    <li><%= link_to "ルーム登録", new_room_path %></li>
+                    <li><%= link_to "予約済みルーム一覧", reservations_path %></li>
+                    <li><%= link_to "登録済みルーム一覧", rooms_path %></li>
+                    <li><%= link_to "設定", user_path(current_user) %></li>
+                    <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                  </ul>
+                <% end %>
+              </nav>
+            </div>
+          </div>
         </div>
-
-        <% if current_user.profile_img_id? %>
-          <p><%= image_tag current_user.profile_img_id.url, :size => '70x70', class: 'user-img' %></p>
-        <% else %>
-          <p><%= image_tag "/assets/default_icon.jpeg", :size => '70x70', class: 'user-img' %></p>
-        <% end %>                  
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path %>
-        <%= link_to "登録する", new_user_registration_path %>
-      <% end %>
-        </div>
-
-      <% if user_signed_in? %>
-        <ul>
-          <li><%= link_to "ルーム登録", new_room_path %></li>
-          <li><%= link_to "予約済みルーム一覧", reservations_path %></li>
-          <li><%= link_to "登録済みルーム一覧", rooms_path %></li>
-          <li><%= link_to "設定", user_path(current_user) %></li>
-          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
-        </ul>
-      <% end %>
-
+      </div>
     </header>
 
-    <div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-        <%= yield %>
+    <div class="notifications">
+      <p class="notice notifications"><%= notice %></p>
+      <p class="alert notifications"><%= alert %></p>
     </div>
 
-    <footer>
+    <%= yield %>
+
+    <footer class="footer">
       <p>&copy; 2020 POTEPAN.INC.</p>
     </footer>
+    
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

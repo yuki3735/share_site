@@ -1,34 +1,35 @@
-<h2>登録済みルーム一覧</h2>
+<div class="room-main">
+  <p class="room-title">登録済みルーム一覧</p>
 
-<table>
+  <table>
     <thead>
-      <tr>
-        <th>ルーム画像</th>
-        <th>ルーム名</th>
-        <th>ルーム紹介</th>
-        <th>料金</th>
-        <th>作成日</th>
+      <tr class="room-list">
+        <th class="room-list">ルーム画像</th>
+        <th class="room-list">ルーム名</th>
+        <th class="room-list">ルーム紹介</th>
+        <th class="room-list">料金</th>
+        <th class="room-list">作成日</th>
       </tr>
     </thead>
     <tbody>
       <% @rooms.each do |room| %>
         <tr>
           <% if room.room_img? %>
-            <td>
+            <td class="room-list-item">
               <%= link_to room_path(room) do %>
                 <%= image_tag room.room_img.url, :size => '200x100' %>
               <% end %>
             </td>
           <% else %>
-            <td><%= image_tag "/assets/rails2.jpeg", :size => '200x100' %></td>
+            <td class="room-list-item"><%= image_tag "/assets/rails2.jpeg", :size => '200x100' %></td>
           <% end %>
-          <td><%= link_to room.roomname, room_path(room) %></td>
-          <td><%= room.introduction %></td>
-          <td><%= room.price%></td>
-          <td><%= room.created_at %></td>
-          <td><%= room.user_id %></td>
-          <td><%= link_to "削除", room, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "panel-block" %></td>
+          <td class="room-list-item"><%= link_to room.roomname, room_path(room) %></td>
+          <td class="room-list-item"><%= room.introduction %></td>
+          <td class="room-list-item">¥<%= room.price%></td>
+          <td class="room-list-item"><%= room.created_at %></td>
+          <td class="room-list-item"><%= link_to "削除", room, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "panel-block" %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+</div>

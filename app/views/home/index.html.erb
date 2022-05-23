@@ -1,8 +1,16 @@
-<%= form_with url: rooms_search_path do |f| %>
-    <h3>Potepan Shareでまだ体験したことのない旅をしよう</h3>
-    <div">
-      <%= f.label :address, "エリア" %>
-      <%= f.search_field :address, placeholder: "東京" %>
-      <%= f.submit "探す" %>
+<div class"top">
+  <div class="top-main">
+    <div class="top-container">
+      <div class="form-frame">
+        <%= form_with url: rooms_search_path, class: "form-area" do |f| %>
+            <p class="form-area-title">Potepan Shareでまだ体験したことのない旅をしよう</p>
+            <div>
+              <%= f.label :address, "エリア" %>
+              <%= f.search_field :address, placeholder: "東京", class: "form-control" %>
+              <%= f.submit "探す", class: "btn btn-primary form-control" %>
+            </div>
+        <% end %>
+      </div>
     </div>
-<% end %>
+  </div>
+</div>

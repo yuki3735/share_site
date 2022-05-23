@@ -1,3 +1,95 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.room-list-item {
+  padding: 0 20px;
+}
+
+.room-title {
+  font-size: 30px;
+}
+
+.room-list {
+  border-bottom: 1px solid gray;
+  padding-bottom: 5px;
+}
+
+.room-container {
+  padding: 10px 10px 0 10px;
+}
+
+.room-name {
+  font-size: x-large;
+}
+
+.room-container-box1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.room-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  label {
+    padding: 1rem 0;
+  }
+  input {
+    font-size: large;
+  }
+  .btn {
+    margin-top: 1rem;
+  }
+}
+
+.room-reservation-item {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.room-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.room-introduction {
+  font-size: 15px;
+  border: 1px solid gray;
+}
+
+.room-element {
+  display: flex;
+}
+
+.room-confirm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input {
+    display: block;
+    margin-bottom: 10px;
+    font-size: large;
+  }
+}
+
+.confirm-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  label {
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+}
+
+.confirm-item {
+  font-size: large;
+  margin-bottom: 1rem;
+}
+
+.confirm-title {
+  border-bottom: 1px solid gray;
+  font-size: 20px;
+  margin-bottom: 1rem;
+}

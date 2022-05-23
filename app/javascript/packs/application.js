@@ -11,3 +11,10 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+let nav = document.getElementById('user-img')
+let menu = document.getElementById('menu')
+
+nav.addEventListener('click', function() {
+    menu.classList.toggle("menu-vanish");
+});

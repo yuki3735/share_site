@@ -5,4 +5,9 @@ class User < ApplicationRecord
   
   has_many :rooms
   has_many :reservations
+
+  with_options presence: true do
+    validates :username
+    validates :email
+  end
 end
