@@ -1,0 +1,24 @@
+<div class="reservation-create-flex">
+    <h3>予約した部屋</h3>
+    <div>
+      <%= @reservation.room.roomname %>
+    </div>
+  </div>
+  <div class="reservation-create-flex">
+    <h3>開始日</h3>
+    <div>
+      <%= @reservation.start_day.strftime("%Y年 %m月 %d日") %>
+    </div>
+  </div>
+  <div class="reservation-create-flex">
+    <h3>終了日</h3>
+    <div>
+      <%= @reservation.end_day.strftime("%Y年 %m月 %d日") %>
+    </div>
+  </div>
+  <div class="reservation-create-flex">
+    <h3>価格</h3>
+    <div>
+      <%= "#{@reservation.total_price}円" %>
+    </div>
+</div>

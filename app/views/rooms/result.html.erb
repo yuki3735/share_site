@@ -1,0 +1,15 @@
+<h1>検索結果:<%= @keys.count %>件</h1>
+<% @keys.each do |key| %>
+  <%= link_to room_path(key) do %>
+    <div>
+      <% if key.room_img? %>
+        <%= image_tag key.room_img.url, :size => '200x100' %>
+      <% else %>
+        <%= image_tag "/assets/rails2.jpeg", :size => '200x100' %></td>
+      <% end %>
+      <p><%= key.roomname %></p>
+      <p><%= key.address %></p>
+      <p><%= "¥ #{key.price}" %></p>
+    </div>
+  <% end %>
+<% end %>
