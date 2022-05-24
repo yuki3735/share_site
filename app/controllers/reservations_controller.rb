@@ -13,7 +13,6 @@ class ReservationsController < ApplicationController
   def new
     @reservation = Reservation.new(reservation_params)
     @room = Room.find_by(id: @reservation.room_id)
-    @days = (@reservation.end_day - @reservation.start_day).to_i
   end
 
   def create

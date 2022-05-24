@@ -21,4 +21,12 @@ class Reservation < ApplicationRecord
       errors.add(:end_day, 'は開始日以降の日付で選択してください') if end_day <= start_day || end_day < Date.today
     end
   end
+  
+  def total_day
+    (self.end_day.to_date - self.start_day.to_date).to_i
+  end
+
+  def total_price
+    (self.room.price.to_i * self.number_people.to_i) * total_day.to_i
+  end
 end

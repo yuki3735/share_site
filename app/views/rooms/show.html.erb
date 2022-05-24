@@ -1,6 +1,7 @@
 <div class="share-body">
   <div class="room-container"> 
     <div class="room-row">
+    <%= render "shared/error", obj: @room %>
       <div class="room-container-box1">
         <% if @room.room_img? %>
           <%= image_tag @room.room_img.url, :size => '500x300' %>
@@ -36,7 +37,7 @@
           <% if user_signed_in? %>
             <%= f.submit "予約する", class: "btn btn-primary" %>
           <% else %>
-            <%= link_to "ログイン", new_user_session_path %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-primary" %>
           <% end %>
           <%= f.hidden_field :room_id, value: @room.id %>
         <% end %>

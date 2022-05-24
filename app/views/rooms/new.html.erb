@@ -2,12 +2,11 @@
     <div class="account-nav">
       <p><%= link_to "基本情報", new_room_path %></p>
     </div>
-    
   <div class="account-edit-content">
     <div class="account-edit-content-item">
       <p class="account-edit-title my-4">ルーム情報登録</p>
     </div>
-    
+    <%= render "shared/error", obj: @room %>
     <%= form_with model: @room do |f| %>
       <table>
         <tr>
